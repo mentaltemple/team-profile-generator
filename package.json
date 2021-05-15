@@ -1,0 +1,14 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "command=line application that generates an html page with employee profiles",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Joshua Abeyta",
+  "license": "ISC"
+}
