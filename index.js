@@ -20,27 +20,29 @@ function buildEngineer() {
   inquirer
     .prompt(questions.engineerQuestions)
     .then((data) => {
-      console.log(data);
       const engineer = new Engineer(
         data.name,
         data.id,
         data.email,
         data.github
       );
+
       teamMembers.push(engineer);
-      console.log(engineer);
-      console.log(teamMembers);
+      addMember();
     })
-    .catch()
-    .then(addMember);
+    .catch();
 }
 
 //build intern function
 function buildIntern() {
-  inquirer.prompt(questions.internQuestions).then((data) => {
-    const intern = new Intern(data.name, data.id, data.email, data.school);
-    teamMembers.push(intern);
-  });
+  inquirer
+    .prompt(questions.internQuestions)
+    .then((data) => {
+      const intern = new Intern(data.name, data.id, data.email, data.school);
+      teamMembers.push(intern);
+      addMember();
+    })
+    .catch();
 }
 
 //check if user added engineer or intern. If done, exit and create HTML.
@@ -49,6 +51,7 @@ function addMember() {
     //if user chooses engineer, build an engineer object
     if (data.teamMember === "Engineer") {
       buildEngineer();
+
       //if user chooses intern, build an intern object
     } else if (data.teamMember === "Intern") {
       buildIntern();
@@ -56,8 +59,6 @@ function addMember() {
       console.log(
         "\nThank you, your team profile has been successfully generated!"
       );
-
-    process.exit(0);
   });
 }
 
@@ -69,10 +70,7 @@ function init() {
     teamMembers.push(manager);
 
     //ask if the client would like to add another team member
-
-    addMember(data);
-
-    // writeToFile("index.html", generateTeam(data));
+    addMember();
   }).catch;
 }
 
