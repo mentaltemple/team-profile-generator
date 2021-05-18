@@ -4,13 +4,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const questions = require("./lib/questions");
-
-//write to new HTML file with user data
-function writeToFile(fileName, data) {
-  return fs.writeFile(fileName, data, (err) =>
-    err ? console.error(err) : console.log("Success!")
-  );
-}
+const renderHTML = require("./src/renderHTML");
 
 //creates an empty array
 const teamMembers = [];
@@ -50,15 +44,18 @@ function addMember() {
   inquirer.prompt(questions.addMemberChoice).then((data) => {
     //if user chooses engineer, build an engineer object
     if (data.teamMember === "Engineer") {
-      buildEngineer();
+      return buildEngineer();
 
       //if user chooses intern, build an intern object
     } else if (data.teamMember === "Intern") {
-      buildIntern();
+      return buildIntern();
     } else
       console.log(
         "\nThank you, your team profile has been successfully generated!"
       );
+    //write to new HTML file with user data
+
+    renderHTML.writeToFile("index.html", renderHTML.renderHTML(teamMembers));
   });
 }
 
