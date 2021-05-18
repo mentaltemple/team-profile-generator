@@ -41,9 +41,10 @@ Walkthrough Video:
 
 ## Credits
 
+- Chip Long: https://github.com/Chip-L
+- Lacey Pape: https://github.com/lapape
 - Benjamin Machock (Instructor)
 - Ramon Sanchez (Tutor)
-- Chip Long: https://github.com/Chip-L
 - Badges: https://github.com/Ileriayo/markdown-badges
 
 ## Tests
