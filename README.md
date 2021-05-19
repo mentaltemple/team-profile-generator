@@ -61,6 +61,8 @@ Once you've run the file from the terminal, you will be presented with a series 
 npm test
 ```
 
+Testing demo video: https://drive.google.com/file/d/1W4NUq5XoCrPPtHJdOQHn_BtOknL8qBcV/view
+
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
