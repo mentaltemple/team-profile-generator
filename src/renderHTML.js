@@ -1,12 +1,102 @@
 const fs = require("fs");
+const path = require("path");
 
-function writeToFile(fileName, data) {
-  return fs.writeFile(fileName, data, (err) =>
-    err ? console.error(err) : console.log("Success!")
-  );
+function writeToFile(data) {
+  //creates an output directory
+  const OUTPUT_DIR = path.resolve(__dirname, "../output/");
+  //creates an output path, joins the output directory with the filename
+  const outputPath = path.join(OUTPUT_DIR, "index.html");
+  if (!fs.existsSync(OUTPUT_DIR)) {
+    fs.mkdirSync(OUTPUT_DIR);
+  }
+  return fs.writeFileSync(outputPath, data, "utf-8");
+
+  // return fs.writeFile(fileName, data, (err) =>
+  //   err ? console.error(err) : console.log("Success!")
+  // );
 }
 
 function renderHTML(data) {
+  const teamArray = data;
+  console.log(teamArray);
+
+  let cardString = "";
+
+  function generateManagerCard(member) {
+    return `<div class="card shadow">
+    <div class="card-header bg-info text-white">
+      <h1>${member.name}</h1>
+      <h2>${member.getRole()}</h2>
+    </div>
+    <div class="card-body bg-light">
+      <div class="list-group list-group-flush border">
+        <li class="list-group-item">ID: ${member.id}</li>
+        <li class="list-group-item">Email:<a href="mailto:${
+          member.email
+        }" target="_blank" rel="noreferrer noopener"> ${member.email}</a></li>
+        <li class="list-group-item">Office #: ${member.officeNum}</li>
+      </div>
+    </div>
+  </div>`;
+  }
+  function generateEngineerCard(member) {
+    return `<div class="card shadow">
+    <div class="card-header bg-info text-white">
+      <h1>${member.name}</h1>
+      <h2>${member.getRole()}</h2>
+    </div>
+    <div class="card-body bg-light">
+      <div class="list-group list-group-flush border">
+        <li class="list-group-item">ID: ${member.id}</li>
+        <li class="list-group-item">Email:<a href="mailto:${
+          member.email
+        }" target="_blank" rel="noreferrer noopener"> ${member.email}</a></li>
+        <li class="list-group-item">GitHub:
+           <a href="https://github.com/${
+             member.github
+           }" target="_blank" rel="noreferrer noopener"> ${member.github}</a>
+        </li>
+      </div>
+    </div>
+  </div>`;
+  }
+  function generateInternCard(member) {
+    return `<div class="card shadow">
+    <div class="card-header bg-info text-white">
+      <h1>${member.name}</h1>
+      <h2>${member.getRole()}</h2>
+    </div>
+    <div class="card-body bg-light">
+      <div class="list-group list-group-flush border">
+        <li class="list-group-item">ID: ${member.id}</li>
+        <li class="list-group-item">
+          Email: <a
+            href="mailto: ${member.email}"
+            target="_blank"
+            rel="noreferrer noopener"
+          >${member.email}</a>
+        </li>
+        <li class="list-group-item">School: ${member.school}</li>
+      </div>
+    </div>
+  </div>`;
+  }
+  //build a card for each member of my teamArray
+  teamArray.forEach((member) => {
+    switch (member.getRole()) {
+      case "Manager":
+        cardString += generateManagerCard(member);
+        break;
+
+      case "Engineer":
+        cardString += generateEngineerCard(member);
+        break;
+
+      case "Intern":
+        cardString += generateInternCard(member);
+    }
+  });
+
   return `
   <!DOCTYPE html>
 <html lang="en">
@@ -28,55 +118,11 @@ function renderHTML(data) {
       <h1>My Team</h1>
     </header>
     <main class="row justify-content-center">
-      <!-- Manager Card -->
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          <h1>NAME</h1>
-          <h2>ROLE</h2>
-        </div>
-        <div class="card-body bg-light">
-          <div class="list-group list-group-flush border">
-            <li class="list-group-item">ID:</li>
-            <li class="list-group-item">Email:</li>
-            <li class="list-group-item">Office #:</li>
-          </div>
-        </div>
-      </div>
-      <!-- Engineer Card -->
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          <h1>NAME</h1>
-          <h2>ROLE</h2>
-        </div>
-        <div class="card-body bg-light">
-          <div class="list-group list-group-flush border">
-            <li class="list-group-item">ID:</li>
-            <li class="list-group-item">Email:</li>
-            <li class="list-group-item">GitHub:</li>
-          </div>
-        </div>
-      </div>
-      <!-- Intern Card -->
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          <h1>NAME</h1>
-          <h2>ROLE</h2>
-        </div>
-        <div class="card-body bg-light">
-          <div class="list-group list-group-flush border">
-            <li class="list-group-item">ID:</li>
-            <li class="list-group-item">Email:</li>
-            <li class="list-group-item">School:</li>
-          </div>
-        </div>
-      </div>
+    ${cardString}
     </main>
   </body>
 </html>
 
-  
-  
-  
   `;
 }
 

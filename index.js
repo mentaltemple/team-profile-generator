@@ -55,7 +55,8 @@ function addMember() {
       );
     //write to new HTML file with user data
 
-    renderHTML.writeToFile("index.html", renderHTML.renderHTML(teamMembers));
+    renderHTML.writeToFile(renderHTML.renderHTML(teamMembers));
+    // "index.html",
   });
 }
 
