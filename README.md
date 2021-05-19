@@ -37,10 +37,15 @@ node index.js
 
 ## Usage
 
-Walkthrough Video:
+Demonstration Video: https://drive.google.com/file/d/17uAxs_7u2cqwjQ2vGe0hQtam8HAYCvRs/view
+
+Once you've run the file from the terminal, you will be presented with a series of questions about your employees. Simply answer all of the questions and a webpage will be generated including all of the info received.
 
 ## Credits
 
+- Jon Gregory
+- Josh Brown
+- TJ Courey
 - Chip Long: https://github.com/Chip-L
 - Lacey Pape: https://github.com/lapape
 - Benjamin Machock (Instructor)
